@@ -1,0 +1,42 @@
+<!-- 
+<form accept-charset = "UTF-8" action="/users" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <label for="email">Email:</label><br>
+  <input type="email" name="user[email]"><br>
+  <label for="username">Username:</label><br>
+  <input type="text" name="user[username]"><br>
+  <label for="password">Password:</label><br>
+  <input type="password" name="user[password]"><br>
+  <input type="submit" value="Submit">
+</form>
+-->
+
+<!--
+<%= form_tag("/users", method: "post") do %>
+  <%= label_tag(:email, "Email:") %><br>
+  <%= text_field_tag(:email) %><br>
+  <%= label_tag(:username, "Username:") %><br>
+  <%= text_field_tag(:username) %><br>
+  <%= label_tag(:password, "Password:") %><br>
+  <%= password_field_tag(:password) %><br>
+  <%= submit_tag("Submit") %>
+<% end %>
+-->
+
+<% if @user.errors.any? %>
+    <ul>
+    <% @user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+<% end %>
+
+<%= form_with model: @user, local: true do |form| %>
+  <%= label_tag(:email, "Email:") %><br>
+  <%= form.email_field :email, placeholder: "example@example.com" %><br>
+  <%= label_tag(:username, "Username:") %><br>
+  <%= form.text_field :username, placeholder: "Your username here" %><br>
+  <%= label_tag(:password, "Password:") %><br>
+  <%= form.password_field(:password) %><br>
+  <%= form.submit "Submit" %>
+<% end %>
